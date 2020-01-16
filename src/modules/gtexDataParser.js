@@ -27,7 +27,7 @@ export function getGtexUrls(){
         geneModelUnfiltered: host + 'dataset/fullCollapsedGeneModelExon?datasetId=gtex_v7&gencodeId=',
 
         // gene expression violin plot specific
-        geneExp: host + 'expression/geneExpression?datasetId=gtex_v7&gencodeId=',
+        geneExp: host + 'expression/geneExpression?datasetId=gtex_v8&gencodeId=',
 
         // gene expression heat map specific
         medGeneExp: host + 'expression/medianGeneExpression?datasetId=gtex_v7&hcluster=true&pageSize=10000',
@@ -43,8 +43,11 @@ export function getGtexUrls(){
 
         // tissue menu specific
         // TODO: remove redundant URLs
-        tissue:  host + 'metadata/tissueSiteDetail?format=json',
-        tissueSites: host + 'metadata/tissueSiteDetail?format=json',
+        //tissue:  host + 'metadata/tissueSiteDetail?format=json',
+        //tissueSites: host + 'metadata/tissueSiteDetail?format=json',
+
+        tissue:  host + 'dataset/tissueInfo?datasetId=gtex_v8&format=json',
+        tissueSites: host + 'dataset/tissueInfo?datasetId=gtex_v8&format=json',
 
         // local static files
         sample: 'tmpSummaryData/gtex.Sample.csv',
@@ -165,13 +168,17 @@ export function parseGenes(data, single=false, geneId=null){
  * @returns {List} of tissues
  */
 export function parseTissues(json){
-    const attr = 'tissueSiteDetail';
+    //const attr = 'tissueSiteDetail';
+    const attr = 'tissueInfo';
+    
     if(!json.hasOwnProperty(attr)) throw 'Parsing Error: required json attr is missing: ' + attr;
     const tissues = json[attr];
 
+    console.log("In here3");
+
     // sanity check
     ['tissueSiteDetailId', 'tissueSiteDetail', 'colorHex'].forEach((d)=>{
-        if (!tissues[0].hasOwnProperty(d)) throw 'Parsing Error: required json attr is missing: ' + d;
+        if (!tissues[0].hasOwnProperty(d)) throw 'Parsing Error: required json attr is missing2: ' + d;
     });
 
     return tissues;
@@ -184,6 +191,8 @@ export function parseTissues(json){
  */
 export function parseTissueDict(json){
     const attr = 'tissueSiteDetail';
+    console.log("In here2")
+
     if(!json.hasOwnProperty(attr)) throw 'Parsing Error: required json attr is missing: ' + attr;
     const tissues = json[attr];
     // sanity check
@@ -220,7 +229,7 @@ export function parseTissueSites(data, forEqtl=false){
     // a hard-coded list because the sample size is not easy to retrieve
     const invalidTissues = ['Bladder', 'Cervix_Ectocervix', 'Cervix_Endocervix', 'Fallopian_Tube', 'Kidney_Cortex'];
 
-    const attr = 'tissueSiteDetail';
+    const attr = 'tissueInfo';
     if(!data.hasOwnProperty(attr)) throw 'Parsing Error: required json attribute is missing: ' + attr;
     let tissues = data[attr];
     ['tissueSite','tissueSiteDetailId','tissueSiteDetail'].forEach((d)=>{

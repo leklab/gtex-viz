@@ -12,6 +12,7 @@ import {createTissueGroupMenu, parseTissueGroupMenu} from './modules/gtexMenuBui
 import GroupedViolin from './modules/GroupedViolin';
 
 export function launch(rootId, tooltipRootId, gencodeId, plotTitle="Gene Expression Violin Plot", urls=getGtexUrls(), margins=_setViolinPlotMargins(50,75,250,60), dimensions={w: window.innerWidth*0.8, h:250}) {
+
     const promises = [
         json(urls.tissue),
         json(urls.geneExp + gencodeId),
@@ -74,6 +75,7 @@ export function launch(rootId, tooltipRootId, gencodeId, plotTitle="Gene Express
                 female: '#e67f7b',
                 male: '#70bcd2'
             };
+
             tissues.forEach(x => {
                 tissueIdNameMap[x.tissueSiteDetailId] = x.tissueSiteDetail;
                 tissueDict[x.tissueSiteDetail] = x;
@@ -105,10 +107,12 @@ export function launch(rootId, tooltipRootId, gencodeId, plotTitle="Gene Express
                 title: plotTitle
             };
 
+
             _drawViolinPlot(violinPlot, margins, dimensions, ids);
             _createTissueFilter(violinPlot, ids.tissueFilter, ids, args[0]);
             _addToolbar(violinPlot, tooltip, ids, urls);
             $(`#${ids.root} #${ids.spinner}`).hide();
+
         });
 }
 

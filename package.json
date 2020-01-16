@@ -9,10 +9,12 @@
   "author": "Katherine Huang",
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "d3": "^5.15.0",
     "rollup-plugin-copy": "^0.2.3",
-    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "uglify-es": "^3.3.9"
   },
   "dependencies": {
     "d3": "^5.0.0",
