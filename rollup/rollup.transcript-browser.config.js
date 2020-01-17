@@ -13,10 +13,10 @@ export default {
     input: 'src/' + name + '.js',
     output: {
         file: process.env.NODE_ENV=='prod'?'build/js/transcript-browser.bundle.min.js':'build/js/transcript-browser.bundle.dev.js',
-        format: 'iife'
+        format: 'iife',
+    	name: name,
+    	sourcemap: 'inline'
     },
-    sourcemap: 'inline',
-    name: name,
     plugins: [
         nodeResolve({jsnext: true, main: true}),
         replace({

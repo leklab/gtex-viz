@@ -37,6 +37,10 @@ import IsoformTrackViewer from "./modules/IsoformTrackViewer";
  * @param urls {Object} of the GTEx web service urls with attr: geneId, tissue, geneModelUnfiltered, geneModel, junctionExp, exonExp
  */
 export function render(type, geneId, rootId, urls=getGtexUrls()){
+
+   	console.log(urls.geneId);
+   	console.log(urls.tissue);
+
     json(urls.geneId + geneId) // query the gene by geneId--gene name or gencode ID with or without versioning
         .then(function(data){
              // get the gene object and its gencode Id
